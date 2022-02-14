@@ -1,8 +1,23 @@
-{% extends "posts_div.html" %} {% block title %}{{username}}'s Posts{% endblock
-    %} {% block header %} {{username}}'s posts {% endblock %} {% block footer %}
-    <div align="center">
-      <a href="/home"
-        ><button type="button" class="btn btn-primary btn-lg">Back</button></a
-      >
-    </div>
-    {% endblock %}
+{% extends 'base.html' %}
+
+<!-- gif -->
+{% block title %} PITCH | Error {% endblock %}
+
+<!-- style -->
+{% block head%} {{ super() }}
+<style>
+    body {
+        background: url('/static/img/not_foundd.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+    }
+</style>
+{% endblock %}
+
+<!-- text -->
+{% block content %}
+<h3 class="text-center alert-warning"> We can't seem to find what you are looking for</h3>
+<p class="text-center text-danger"> Check the url and try again</p>
+{% endblock %}

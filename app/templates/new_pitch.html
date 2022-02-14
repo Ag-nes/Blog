@@ -1,8 +1,19 @@
-{% extends "posts_div.html" %} {% block title %}{{username}}'s Posts{% endblock
-    %} {% block header %} {{username}}'s posts {% endblock %} {% block footer %}
-    <div align="center">
-      <a href="/home"
-        ><button type="button" class="btn btn-primary btn-lg">Back</button></a
-      >
+{% extends 'base.html' %} {% import 'bootstrap/wtf.html' as wtf%}
+
+<!-- head -->
+{% block title %} PITCH | new {% endblock %}
+
+
+<!-- content -->
+{% block content%}
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            {{wtf.quick_form(pitch_form)}}
+        </div>
+        <div class="col-md-2"></div>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}
+
