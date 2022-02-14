@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% import 'bootstrap/wtf.html' as wtf%}
+<!-- head -->
+{% block title %} PITCH | login {% endblock %}
+
+
+<!-- content -->
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+
+        <div class="col-md-8">
+            <h3 class="text-center">Sign up and enjoy Writer priviledges</h3>
+            {{wtf.quick_form(signup_form)}}
+        </div>
+
+        <div class="col-md-2"></div>
+    </div>
+</div>
+{% endblock %}
