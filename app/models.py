@@ -29,7 +29,7 @@ class User(UserMixin, db.Model):
 
     @property   #write-only
     def password(self):
-        raise AttributeError('You can only read this attribute')
+        raise AttributeError('You can not read this attribute')
 
     @password.setter
     def password(self, password):
