@@ -16,7 +16,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="/">BLOG POSTS</a>
+        <a class="navbar-brand" href="/">GEENAH'S POSTS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -25,7 +25,7 @@
 
                 {% if current_user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/new_post" class="text-dark">Add a Post</a>
+                    <a class="nav-link text-dark" href="/new_post" class="text-white">Add a Post</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="{{url_for('main.profile',name=current_user.username)}}">

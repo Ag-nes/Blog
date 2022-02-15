@@ -4,7 +4,7 @@ from flask_script import Manager, Server
 from flask_migrate import Migrate, MigrateCommand
 
 
-app = create_app('dev')
+app = create_app('production')
 
 manager = Manager(app)
 manager.add_command('server', Server)
