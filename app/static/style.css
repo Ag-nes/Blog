@@ -41,7 +41,7 @@ body {
 }
 
 .box:before {
-    border-color: #bbb rgba(0, 0, 0, 0);
+    border-color: #bbb sienna;
     border-style: solid;
     border-width: 8px 8px 0;
     bottom: -8px;
@@ -53,7 +53,7 @@ body {
 }
 
 .box:after {
-    border-color: #FFFFFF rgba(0, 0, 0, 0);
+    border-color: #FFFFFF white;
     border-style: solid;
     border-width: 6px 6px 0;
     bottom: -6px;
@@ -66,7 +66,7 @@ body {
 
 .box {
     background: none repeat scroll 0 0 #FFFFFF;
-    border: 1px dashed #bbb;
+    border: 1px dashed white;
     border-radius: 5px;
     margin: 0 auto;
     position: relative;
