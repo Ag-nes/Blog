@@ -14,10 +14,10 @@ class UpdatePost(FlaskForm):
 
 
 class PostForm(FlaskForm):
-    post_text = TextAreaField('Your post here', validators=[input_required()]) 
+    post_text = TextAreaField('New Post', validators=[input_required()]) 
     submit = SubmitField('Post')
 
 
 class CommentForm(FlaskForm):
     post_comment = TextAreaField('Make a comment', validators=[input_required()])
-    submit = SubmitField('Comment')
+    submit = SubmitField('Submit')

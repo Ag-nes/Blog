@@ -1,3 +1,4 @@
+import os
 from . import main
 from flask import render_template, request, redirect, url_for, abort
 from ..models import User, Post, Comments
