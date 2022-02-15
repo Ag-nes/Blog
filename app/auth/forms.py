@@ -1,14 +1,14 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField ,ValidationError
-from wtforms.validators import Required, Email, EqualTo
+from wtforms.validators import input_required, Email, EqualTo
 from ..models import User
 
 
 class SignupForm(FlaskForm):
-    username = StringField('Enter your name', validators=[Required()])
-    email = StringField('Enter your email address', validators=[Required(),Email()])
-    password = PasswordField('Password',validators = [Required(), EqualTo('password_confirm',message = 'Passwords must match')])
-    password_confirm = PasswordField('Confirm Passwords',validators = [Required()])
+    username = StringField('Enter your name', validators=[input_required()])
+    email = StringField('Enter your email address', validators=[input_required(),Email()])
+    password = PasswordField('Password',validators = [input_required(), EqualTo('password_confirm',message = 'Passwords must match')])
+    password_confirm = PasswordField('Confirm Passwords',validators = [input_required()])
     submit = SubmitField('Sign Up')
 
     def validate_email(self, data_field):
@@ -20,8 +20,8 @@ class SignupForm(FlaskForm):
             raise ValidationError('THis username is already taken')
 
 class LoginForm(FlaskForm):
-    email = StringField('Your Email Address',validators=[Required(),Email()])
-    password = PasswordField('Password',validators =[Required()])
+    email = StringField('Your Email Address',validators=[input_required(),Email()])
+    password = PasswordField('Password',validators =[input_required()])
     remember = BooleanField('Remember me')
     submit = SubmitField('Sign In')
     

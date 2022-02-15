@@ -1,23 +1,23 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SelectField ,SubmitField
-from wtforms.validators import Required
+from wtforms.validators import input_required
 
 
 class EditProfile(FlaskForm):
-    about = TextAreaField('Tell us about yourself.',validators = [Required()])
+    about = TextAreaField('Tell us about yourself.',validators = [input_required()])
     submit = SubmitField('Update')
 
 
 class UpdatePost(FlaskForm):
-    text = TextAreaField('Edit post here',validators = [Required()])
+    text = TextAreaField('Edit post here',validators = [input_required()])
     submit = SubmitField('Update')
 
 
-class PitchForm(FlaskForm):
-    pitch_text = TextAreaField('Your pitch here', validators=[Required()]) 
+class PostForm(FlaskForm):
+    post_text = TextAreaField('Your post here', validators=[input_required()]) 
     submit = SubmitField('Post')
 
 
 class CommentForm(FlaskForm):
-    pitch_comment = TextAreaField('Make a comment', validators=[Required()])
+    post_comment = TextAreaField('Make a comment', validators=[input_required()])
     submit = SubmitField('Comment')

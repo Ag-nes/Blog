@@ -1,8 +1,8 @@
 from . import main
 from flask import render_template, request, redirect, url_for, abort
-from ..models import User, Pitches, Comments
+from ..models import User, Post, Comments
 from flask_login import login_required, current_user
-from .forms import EditProfile, PitchForm, CommentForm, UpdatePost
+from .forms import EditProfile, PostForm, CommentForm, UpdatePost
 from .. import db, photos
 from ..requests import get_quote
 from sqlalchemy import desc
@@ -13,72 +13,72 @@ from ..email import mail_message
 def home():
     quote = get_quote()
 
-    pitches=Pitches.query.all()
-    identification = Pitches.user_id
+    post=Post.query.all()
+    identification = Post.user_id
     posted_by = User.query.filter_by(id=identification).first()
     user = User.query.filter_by(id=current_user.get_id()).first()
 
-    recent_post = Pitches.query.order_by(desc(Pitches.id)).all()
+    recent_post = Post.query.order_by(desc(Post.id)).all()
 
-    return render_template('pitches.html', quote=quote, pitches=pitches, posted_by=posted_by, user=user, recent_post=recent_post)
+    return render_template('post.html', quote=quote, posts=post, posted_by=posted_by, user=user, recent_post=recent_post)
 
 
-@main.route('/new_pitch', methods=['GET','POST'])
+@main.route('/new_post', methods=['GET','POST'])
 @login_required
-def pitch_form():
-    pitch_form = PitchForm()
-    if pitch_form.validate_on_submit():
-        text = pitch_form.pitch_text.data
-        new_pitch = Pitches(text=text, user=current_user)
-        new_pitch.save_pitch()
+def post_form():
+    post_form = PostForm()
+    if post_form.validate_on_submit():
+        text = post_form.post_text.data
+        new_post = Post(text=text, user=current_user)
+        new_post.save_post()
 
         data = User.query.all()
         for user in data:
             mail_message('New post up!', 'email/new_post', user.email, user=user)
             return redirect(url_for('main.home'))
-    return render_template('new_pitch.html', pitch_form=pitch_form, )
+    return render_template('new_post.html', post_form=post_form, )
 
 
-@main.route('/edit_post/<int:pitch_id>', methods=['GET','POST'])
+@main.route('/edit_post/<int:post_id>', methods=['GET','POST'])
 @login_required
-def update_post(pitch_id):
-    pitch = Pitches.query.filter_by(id=pitch_id).first()
+def update_post(post_id):
+    post = Post.query.filter_by(id=post_id).first()
 
     form = UpdatePost()
     if form.validate_on_submit():
-        pitch.text=form.text.data
-        db.session.add(pitch)
+        post.text=form.text.data
+        db.session.add(post)
         db.session.commit()
-        return redirect(url_for('.home', pitch_id=pitch.id))
+        return redirect(url_for('.home', post_id=post.id))
     return render_template('edit_post.html', form=form)
 
 
-@main.route('/delete_post/<int:pitch_id>', methods=['GET','POST'])
+@main.route('/delete_post/<int:post_id>', methods=['GET','POST'])
 @login_required
-def delete_post(pitch_id):
-    pitch = Pitches.query.filter_by(id=pitch_id).first()
+def delete_post(post_id):
+    post = Post.query.filter_by(id=post_id).first()
 
-    db.session.delete(pitch)
+    db.session.delete(post)
     db.session.commit()
-    return redirect(url_for('.home', pitch_id=pitch.id))
+    return redirect(url_for('.home', post_id=post.id))
 
 
-@main.route('/comments/<int:pitch_id>', methods=['GET','POST'])
-def pitch_comments(pitch_id):
-    comments = Comments.get_comments(pitch_id)
+@main.route('/comments/<int:post_id>', methods=['GET','POST'])
+def post_comments(post_id):
+    comments = Comments.get_comments(post_id)
 
-    pitch = Pitches.query.get(pitch_id)
-    pitch_posted_by = pitch.user_id
-    user = User.query.filter_by(id=pitch_posted_by).first()
+    post = Post.query.get(post_id)
+    post_posted_by = post.user_id
+    user = User.query.filter_by(id=post_posted_by).first()
 
     form = CommentForm()
     if form.validate_on_submit():
-        comment = form.pitch_comment.data      
-        new_comment = Comments(comment=comment, pitch_id=pitch_id, user_id=current_user.get_id())
+        comment = form.post_comment.data      
+        new_comment = Comments(comment=comment, post_id=post_id, user_id=current_user.get_id())
         new_comment.save_comment()
-        return redirect(url_for('main.pitch_comments',pitch_id = pitch_id))
+        return redirect(url_for('main.post_comments',post_id = post_id))
 
-    return render_template('comments.html', comment_form=form, comments=comments, pitch = pitch, user=user)
+    return render_template('comments.html', comment_form=form, comments=comments, post = post, user=user)
 
 
 @main.route('/delete_comment/<int:comment_id>', methods=['GET','POST'])
