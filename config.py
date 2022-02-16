@@ -4,6 +4,7 @@ class Config:
     '''
     '''
     SECRET_KEY='SECRET_KEY'
+    SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://agnes:powers123@localhost/powerposts'
     UPLOADED_PHOTOS_DEST='app/static/photos'
 
     #email config
@@ -26,7 +27,6 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     '''
     '''
-    SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://agnes:powers123@localhost/powerposts'
 
     DEBUG=True
 
