@@ -7,7 +7,7 @@ class Config:
     UPLOADED_PHOTOS_DEST='app/static/photos'
 
     #email config
-    MAIL_SERVER = 'faithagnes2@gmail.com'
+    MAIL_SERVER = 'smpt.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
@@ -17,6 +17,7 @@ class ProductionConfig(Config):
     '''
     '''
     SQLALCHEMY_DATABASE_URI=os.environ.get('DATABASE_URL')
+    print(SQLALCHEMY_DATABASE_URI)
 
 class DevelopmentConfig(Config):
     '''

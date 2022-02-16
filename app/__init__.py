@@ -1,5 +1,5 @@
 from flask import Flask
-from config import config_options
+from config import ProductionConfig, config_options
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -17,11 +17,11 @@ photos = UploadSet('photos',IMAGES)
 login_manager.session_protection='string'
 login_manager.login_view='auth.login'
 
-def create_app(config_name):
+def create_app(config_name=ProductionConfig):
     app = Flask(__name__)
 
     #set up
-    app.config.from_object(config_options[config_name])
+    app.config.from_object(ProductionConfig)
 
     #init
     bootstrap.init_app(app)
