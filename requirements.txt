@@ -27,6 +27,6 @@ migrations==0.1.1
 psycopg2==2.9.3
 SQLAlchemy==1.4.31
 visitor==0.1.3
-Werkzeug==2.0.3
+Werkzeug==0.16.0
 WTForms==3.0.1
 zipp==3.7.0
